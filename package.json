@@ -1,0 +1,35 @@
+{
+  "name": "findafriend-api",
+  "version": "1.0.0",
+  "description": "uma API para a adoção de animais",
+  "main": "index.js",
+  "scripts": {
+    "dev": "tsx watch src/server.ts",
+    "build": "tsup src --out-dir build",
+    "start": "node build/server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Victor-Palha/FindAFriend-API.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Victor-Palha/FindAFriend-API/issues"
+  },
+  "homepage": "https://github.com/Victor-Palha/FindAFriend-API#readme",
+  "devDependencies": {
+    "@types/node": "^20.2.3",
+    "prisma": "4.14.1",
+    "tsup": "^6.7.0",
+    "tsx": "^3.12.7",
+    "typescript": "^5.0.4"
+  },
+  "dependencies": {
+    "@prisma/client": "4.14.1",
+    "dotenv": "16.0.3",
+    "fastify": "^4.17.0",
+    "zod": "3.21.4"
+  }
+}
