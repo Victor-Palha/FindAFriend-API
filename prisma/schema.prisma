@@ -11,16 +11,24 @@ datasource db {
 }
 
 enum Role {
-  ADMIN
+  ORG
   USER
+}
+
+enum Situation {
+  ADOPTED
+  ADOPTION
 }
 
 model User{
   id_user String @id @default(uuid())
+  name String
+  cpf String @unique
   email String @unique
   password String
   role Role @default(USER)
   created_at DateTime @default(now())
+  pets Pet[]
 
   org Org?
 
@@ -31,6 +39,7 @@ model Org{
   id_org String @id @default(uuid())
   name String
   address String
+  cnpj String @unique
   cep String
   city String
   phone String @unique
@@ -49,9 +58,12 @@ model Pet{
   race String
   castrated Boolean
   vaccine_record Boolean
+  situation Situation @default(ADOPTION)
 
+  user User @relation(fields: [user_id], references: [id_user])
   org Org @relation(fields: [org_id], references: [id_org])
 
+  user_id String @unique
   org_id String
   @@map("pets")
 }
