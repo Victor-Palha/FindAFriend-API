@@ -30,4 +30,9 @@ export class InMemoryUserRepository implements UserRepository{
         return user || null
     }
 
+    async findByEmail(email: string){
+        const user = this.items.find(user => user.email === email)
+        return user || null
+    }
+
 }
