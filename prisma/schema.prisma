@@ -30,24 +30,23 @@ model User{
   created_at DateTime @default(now())
   pets Pet[]
 
-  org Org?
-
   @@map("users")
 }
 
 model Org{
   id_org String @id @default(uuid())
   name String
+  email String @unique
+  password String
   address String
   cnpj String @unique
   cep String
   city String
   phone String @unique
+  created_at DateTime @default(now())
 
-  user User @relation(fields: [user_id], references: [id_user])
   pet Pet[]
 
-  user_id String @unique
   @@map("orgs")
 }
 

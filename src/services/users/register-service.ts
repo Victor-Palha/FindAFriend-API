@@ -1,20 +1,27 @@
 import { UserRepository } from '@/repositorys/users-repository';
 import {hash} from 'bcryptjs';
 import { UserAlreadyExists } from './errors/user-already-exists-error';
+import { User } from '@prisma/client';
+import { validateCpf } from '@/utils/validate-cpf';
+import { InvalidCredencialsError } from './errors/invalid-credencials-error';
+
 type RegisterRequest = {
     name: string;
     email: string;
     password: string;
     cpf: string;
+    birthdate: string;
+}
+type RegisterResponse ={
+    user:User
 }
 
 export class UserRegisterService{
     constructor(private userRepository: UserRepository){}
-    async execute({name, email, password, cpf}: RegisterRequest){
-        const passwordHash = await hash(password, 8)
-
+    async execute({name, email, password, cpf, birthdate}: RegisterRequest): Promise<RegisterResponse>{
+        
         //validate user
-
+        
         let userAlreadyExists = await this.userRepository.findByCpf(cpf)
         if(userAlreadyExists){
             throw new UserAlreadyExists
@@ -24,9 +31,18 @@ export class UserRegisterService{
         if(userAlreadyExists){
             throw new UserAlreadyExists
         }
-
-
+        
+        const response = await validateCpf({cpf, birthdate})
+        if(response.code != 200){
+            throw new InvalidCredencialsError
+        }
+        //console.log(name.normalize("NFD").replace(/[^a-zA-Z\s]/g, "").toUpperCase() + " " + " " +response.data[0].nome.normalize("NFD").toUpperCase())
+        if(name.normalize("NFD").replace(/[^a-zA-Z\s]/g, "").toUpperCase() !== response.data[0].nome.normalize("NFD").toUpperCase()){
+            throw new InvalidCredencialsError
+        }
+        
         //create
+        const passwordHash = await hash(password, 8)
         const user = await this.userRepository.create({
             name,
             email,

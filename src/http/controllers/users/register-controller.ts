@@ -7,15 +7,17 @@ export async function userRegister(req:FastifyRequest, res: FastifyReply){
         name: z.string(),
         email: z.string().email(),
         password: z.string().min(6),
-        cpf: z.string().length(11)
+        cpf: z.string().length(11),
+        birthdate: z.string().length(10)
     })
 
-    const {name, email, password, cpf} = registerUserSchemaBody.parse(req.body)
+    const {name, email, password, cpf, birthdate} = registerUserSchemaBody.parse(req.body)
 
     return res.status(201).send({
         name,
         email,
         password,
-        cpf
+        cpf,
+        birthdate
     })
 }
