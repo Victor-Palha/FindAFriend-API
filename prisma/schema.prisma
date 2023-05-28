@@ -53,10 +53,10 @@ model Pet{
   vaccine_record Boolean
   situation Situation @default(ADOPTION)
 
-  user User @relation(fields: [user_id], references: [id_user])
+  user User? @relation(fields: [user_id], references: [id_user])
   org Org @relation(fields: [org_id], references: [id_org])
 
-  user_id String @unique
+  user_id String?
   org_id String
   @@map("pets")
 }

@@ -38,8 +38,9 @@ export class OrgRegisterService{
         }
 
         const responseCep = await ValidateCep(cep)
+        //console.log(responseCep)
         
-        if(responseCep.cep === undefined){
+        if(responseCep.cep === undefined || responseCep.localidade.normalize("NFD").replace(/[^a-zA-Z\s]/g, "").toUpperCase() !== city.normalize("NFD").replace(/[^a-zA-Z\s]/g, "").toUpperCase()){
             throw new InvalidCEPError
         }
 

@@ -41,7 +41,7 @@ describe("Auth Org", ()=>{
             address: "Rua imaginaria, 123",
             cnpj: "03636198000192",
             cep: "66025610",
-            city: "BellHell",
+            city: "Belém",
             phone: "(11) 1234-5678",
         })
 

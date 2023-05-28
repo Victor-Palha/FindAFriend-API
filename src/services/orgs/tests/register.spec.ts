@@ -20,7 +20,7 @@ describe.skip("Org Register", ()=>{
             address: "Rua imaginaria, 123",
             cnpj: "03636198000192",
             cep: "66025610",
-            city: "BellHell",
+            city: "Belém",
             phone: "(11) 1234-5678",
         })
 
@@ -35,7 +35,7 @@ describe.skip("Org Register", ()=>{
             address: "Rua imaginaria, 123",
             cnpj: "03636198000192",
             cep: "66025610",
-            city: "BellHell",
+            city: "Belém",
             phone: "(11) 1234-5678",
         })
 
@@ -47,7 +47,7 @@ describe.skip("Org Register", ()=>{
                 address: "Rua imaginaria, 123",
                 cnpj: "03636198000192",
                 cep: "12345678",
-                city: "BellHell",
+                city: "Belém",
                 phone: "(11) 1234-5678",
             })
         }).rejects.toBeInstanceOf(Error)

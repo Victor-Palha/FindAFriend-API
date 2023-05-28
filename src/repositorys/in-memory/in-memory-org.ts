@@ -30,4 +30,14 @@ export class InMemoryOrgRepository implements OrgRepository{
         return org || null
     }
 
+    async findById(id: string){
+        const org = this.items.find(org => org.id_org === id)
+        return org || null
+    }
+
+    async findByCity(city: string){
+        const org = this.items.filter(org => org.city === city)
+        return org || null
+    }
+
 }
