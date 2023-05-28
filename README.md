@@ -7,8 +7,8 @@ uma API para a adoção de animais
 [] Deve ser possível listar todos os pets disponíveis para adoção em uma cidade
 [] Deve ser possível filtrar pets por suas características
 [] Deve ser possível visualizar detalhes de um pet para adoção
-[] Deve ser possível se cadastrar como uma ORG
-[] Deve ser possível realizar login como uma ORG
+[x] Deve ser possível se cadastrar como uma ORG
+[x] Deve ser possível realizar login como uma ORG
 
 ### Regras de negócio
 

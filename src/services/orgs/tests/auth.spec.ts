@@ -1,22 +1,23 @@
-import { InMemoryOrgRepository } from "@/repositorys/in-memory/in-memory-org";
+import { OrgRepository } from "@/repositorys/org-repository";
 import { beforeEach, describe, expect, it } from "vitest";
-import { OrgRegisterService } from "../register-service";
+import { OrgAuthService } from "../auth-service";
+import { InMemoryOrgRepository } from "@/repositorys/in-memory/in-memory-org";
+import { hash } from "bcryptjs";
 
 let inMemoryOrgRepository: InMemoryOrgRepository
-let sut: OrgRegisterService
+let sut: OrgAuthService
 
-
-describe.skip("Org Register", ()=>{
+describe("Auth Org", ()=>{
     beforeEach(()=>{
         inMemoryOrgRepository = new InMemoryOrgRepository()
-        sut = new OrgRegisterService(inMemoryOrgRepository)
+        sut = new OrgAuthService(inMemoryOrgRepository)
     })
 
-    it("should be able to register a new org", async ()=>{
-        const { org } = await sut.execute({
+    it("should be able to auth an org", async ()=>{
+        await inMemoryOrgRepository.create({
             name: "MPF GABINETE DO MINISTRO",
             email: "faf@test.com",
-            password: "12345678",
+            password: await hash("12345678", 8),
             address: "Rua imaginaria, 123",
             cnpj: "03636198000192",
             cep: "66025610",
@@ -24,14 +25,19 @@ describe.skip("Org Register", ()=>{
             phone: "(11) 1234-5678",
         })
 
+        const {org} = await sut.execute({
+            email: "faf@test.com",
+            password: "12345678"
+        })
+
         expect(org).toHaveProperty("id_org")
     })
 
-    it("should not be able to register a org with same cnpj", async ()=>{
-        await sut.execute({
+    it("should not be able to auth an org with wrong email", async ()=>{
+        await inMemoryOrgRepository.create({
             name: "MPF GABINETE DO MINISTRO",
             email: "faf@test.com",
-            password: "12345678",
+            password: await hash("12345678", 8),
             address: "Rua imaginaria, 123",
             cnpj: "03636198000192",
             cep: "66025610",
@@ -41,14 +47,8 @@ describe.skip("Org Register", ()=>{
 
         expect(async ()=>{
             await sut.execute({
-                name: "MPF GABINETE DO MINISTRO",
-                email: "faf@test.com",
-                password: "12345678",
-                address: "Rua imaginaria, 123",
-                cnpj: "03636198000192",
-                cep: "12345678",
-                city: "BellHell",
-                phone: "(11) 1234-5678",
+                email: "faf@teste.com",
+                password: "12345678"
             })
         }).rejects.toBeInstanceOf(Error)
     })

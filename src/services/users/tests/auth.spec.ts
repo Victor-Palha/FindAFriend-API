@@ -24,6 +24,6 @@ describe("Auth User", ()=>{
             password: "12345678"
         })
 
-        expect(user.role).toEqual("USER")
+        expect(user).toHaveProperty("id_user")
     })
 })

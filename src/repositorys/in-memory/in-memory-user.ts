@@ -1,4 +1,4 @@
-import { Prisma, Role, User } from "@prisma/client";
+import { Prisma, User } from "@prisma/client";
 import { UserRepository } from "../users-repository";
 import { randomUUID } from "crypto";
 
@@ -14,7 +14,6 @@ export class InMemoryUserRepository implements UserRepository{
             password: data.password,
             cpf: data.cpf,
             created_at: new Date(),
-            role: "USER" as Role
         }
 
         this.items.push(user)

@@ -10,11 +10,6 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-enum Role {
-  ORG
-  USER
-}
-
 enum Situation {
   ADOPTED
   ADOPTION
@@ -26,7 +21,6 @@ model User{
   cpf String @unique
   email String @unique
   password String
-  role Role @default(USER)
   created_at DateTime @default(now())
   pets Pet[]
 
