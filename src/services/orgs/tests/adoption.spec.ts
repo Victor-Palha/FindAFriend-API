@@ -1,21 +1,31 @@
 import {beforeEach, describe, expect, it} from "vitest";
 import { InMemoryOrgRepository } from "@/repositorys/in-memory/in-memory-org";
 import { InMemoryPetRepository } from "@/repositorys/in-memory/in-memory-pet";
-import { ContactPetService } from "../contact.service";
+import { AdoptionService } from "../adoption-service";
+import { InMemoryUserRepository } from "@/repositorys/in-memory/in-memory-user";
+
 
 let inMemoryOrg: InMemoryOrgRepository
+let inMemoryUser: InMemoryUserRepository
 let inMemoryPet: InMemoryPetRepository
-let sut: ContactPetService
+let sut: AdoptionService
 
-describe.skip("Contact to adoption", ()=>{
+describe.skip("Adoption pet", ()=>{
 
     beforeEach(()=>{
         inMemoryOrg = new InMemoryOrgRepository()
         inMemoryPet = new InMemoryPetRepository()
-        sut = new ContactPetService(inMemoryPet, inMemoryOrg)
+        inMemoryUser = new InMemoryUserRepository()
+        sut = new AdoptionService(inMemoryPet, inMemoryUser)
     })
 
-    it("should be able to contact org to adopte a pet", async ()=>{
+    it("should be able link a pet to a user", async ()=>{
+        const user = await inMemoryUser.create({
+            name: "joão victor ferreira palha",
+            email: "joedoe@test.com",
+            cpf: "42355578925",
+            password: "12345678"
+        })
         const org = await inMemoryOrg.create({
             name: "MPF GABINETE DO MINISTRO",
             email: "faf@test.com",
@@ -27,7 +37,7 @@ describe.skip("Contact to adoption", ()=>{
             phone: "(11) 1234-5678",
         })
 
-        const pet = await inMemoryPet.create({
+        const petCreated = await inMemoryPet.create({
             species: "dog",
             castrated: true,
             org_id: org.id_org,
@@ -35,8 +45,10 @@ describe.skip("Contact to adoption", ()=>{
             vaccine_record: false
         })
 
-        const { whatsapp } = await sut.execute({id_pet: pet.id_pet})
-        console.log(whatsapp)
-        expect(whatsapp).toBe(org.phone)
+        const {pet} = await sut.execute({pet_id: petCreated.id_pet, cpf: user.cpf})
+
+        expect(pet.situation).toBe("ADOPTED")
+        expect(pet.user_id).toBe(user.id_user)
+        
     })
 })
