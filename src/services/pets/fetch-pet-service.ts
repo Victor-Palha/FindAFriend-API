@@ -1,7 +1,6 @@
 import { OrgRepository } from "@/repositorys/org-repository";
 import { PetRepository } from "@/repositorys/pet-repository";
 import { Pet } from "@prisma/client";
-import { InvalidOrgError } from "./errors/invalid-org-error";
 
 interface PetFetchRequest{
     city: string
@@ -26,13 +25,10 @@ export class FetchPetService {
             const org = fetchOrg.find(org => org.id_org === pet.org_id)
             return {
                 ...pet,
-                org
+                city: org?.city
             }
         })
-        pets = pets.filter(pet => pet.org !== undefined && pet.situation === 'ADOPTION')
-
-        //console.log(pets)
-
+        pets = pets.filter(pet => pet.city !== undefined && pet.situation === 'ADOPTION')
 
         return {pets}
     }

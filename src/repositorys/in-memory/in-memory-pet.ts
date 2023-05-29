@@ -33,4 +33,9 @@ export class InMemoryPetRepository implements PetRepository{
         return pets.slice((page - 1) * 20 , page * 20)
     }
 
+    async findById(id: string){
+        const pet = this.items.find(item => item.id_pet === id)
+        return pet || null
+    }
+
 }
