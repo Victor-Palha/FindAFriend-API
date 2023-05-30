@@ -1,4 +1,3 @@
-import { OrgRepository } from "@/repositorys/org-repository";
 import { beforeEach, describe, expect, it } from "vitest";
 import { OrgAuthService } from "../auth-service";
 import { InMemoryOrgRepository } from "@/repositorys/in-memory/in-memory-org";
