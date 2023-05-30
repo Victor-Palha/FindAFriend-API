@@ -39,11 +39,12 @@ export class InMemoryPetRepository implements PetRepository{
     }
 
     async updatePet(id: string, data: Prisma.PetUncheckedUpdateInput){
-        let pet = this.items.find(item => item.id_pet === id)
-        pet?.situation === data.situation
-        pet?.user_id === data.user_id
-
-        return pet as Pet
+        //console.log(data)
+        let pet = this.items.find(item => item.id_pet === id) as Pet
+        pet.situation = data.situation as Situation
+        pet.user_id = data.user_id as string
+        //console.log(pet)
+        return pet
     }
 
 }

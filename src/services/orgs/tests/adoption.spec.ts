@@ -10,7 +10,7 @@ let inMemoryUser: InMemoryUserRepository
 let inMemoryPet: InMemoryPetRepository
 let sut: AdoptionService
 
-describe.skip("Adoption pet", ()=>{
+describe("Adoption pet", ()=>{
 
     beforeEach(()=>{
         inMemoryOrg = new InMemoryOrgRepository()
