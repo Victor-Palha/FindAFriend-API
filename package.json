@@ -7,7 +7,11 @@
     "dev": "tsx watch src/server.ts",
     "build": "tsup src --out-dir build",
     "start": "node build/server.js",
-    "test": "vitest run"
+    "test": "vitest run",
+    "test:e2e": "vistest run --dir src/http",
+    "test:ce": "npm link ./prisma/vitest-environment-prisma",
+    "test:ie": "npm link vitest-environment-prisma",
+    "pretest:e2e": "run-s test:create-environment test:install-environment"
   },
   "repository": {
     "type": "git",
@@ -23,6 +27,7 @@
   "devDependencies": {
     "@types/bcryptjs": "2.4.2",
     "@types/node": "^20.2.3",
+    "@types/supertest": "2.0.12",
     "@vitest/ui": "0.31.1",
     "prisma": "4.14.1",
     "supertest": "6.3.3",
@@ -33,6 +38,8 @@
     "vitest": "0.31.1"
   },
   "dependencies": {
+    "@fastify/cookie": "8.3.0",
+    "@fastify/jwt": "7.0.0",
     "@prisma/client": "4.14.1",
     "bcryptjs": "2.4.3",
     "dotenv": "16.0.3",

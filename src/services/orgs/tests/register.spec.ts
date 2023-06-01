@@ -1,15 +1,18 @@
 import { InMemoryOrgRepository } from "@/repositorys/in-memory/in-memory-org";
 import { beforeEach, describe, expect, it } from "vitest";
 import { OrgRegisterService } from "../register-service";
+import { InMemoryUserRepository } from "@/repositorys/in-memory/in-memory-user";
 
 let inMemoryOrgRepository: InMemoryOrgRepository
+let inMemoryUserRepository: InMemoryUserRepository
 let sut: OrgRegisterService
 
 
 describe.skip("Org Register", ()=>{
     beforeEach(()=>{
         inMemoryOrgRepository = new InMemoryOrgRepository()
-        sut = new OrgRegisterService(inMemoryOrgRepository)
+        inMemoryUserRepository = new InMemoryUserRepository()
+        sut = new OrgRegisterService(inMemoryOrgRepository, inMemoryUserRepository)
     })
 
     it("should be able to register a new org", async ()=>{

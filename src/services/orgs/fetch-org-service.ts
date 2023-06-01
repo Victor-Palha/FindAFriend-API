@@ -12,6 +12,7 @@ export class FetchOrgService{
         if(orgs.length === 0){
             throw new Error("No orgs found")
         }
+        //console.log(orgs)
         return { orgs }
     }
 }

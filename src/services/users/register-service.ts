@@ -4,6 +4,7 @@ import { UserAlreadyExists } from './errors/user-already-exists-error';
 import { User } from '@prisma/client';
 import { validateCpf } from '@/utils/validate-cpf';
 import { InvalidCredencialsError } from './errors/invalid-credencials-error';
+import { OrgRepository } from '@/repositorys/org-repository';
 
 type RegisterRequest = {
     name: string;
@@ -17,7 +18,7 @@ type RegisterResponse ={
 }
 
 export class UserRegisterService{
-    constructor(private userRepository: UserRepository){}
+    constructor(private userRepository: UserRepository, private orgRepository: OrgRepository){}
     async execute({name, email, password, cpf, birthdate}: RegisterRequest): Promise<RegisterResponse>{
         
         //validate user
@@ -29,6 +30,10 @@ export class UserRegisterService{
 
         userAlreadyExists = await this.userRepository.findByEmail(email)
         if(userAlreadyExists){
+            throw new UserAlreadyExists
+        }
+        let userAlreadyExistsOrg = await this.orgRepository.findByEmail(email)
+        if(userAlreadyExistsOrg){
             throw new UserAlreadyExists
         }
         

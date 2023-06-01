@@ -1,18 +1,29 @@
-version: '3.8'
+# version: '3.8'
 
-services:
-  mysql:
-    image: mysql:latest
-    container_name: find-a-friend
-    command: --default-authentication-plugin=caching_sha2_password
-    restart: unless-stopped
-    environment:
-        MYSQL_ROOT_PASSWORD: root
-        MYSQL_PASSWORD: root
-        MYSQL_DATABASE: find-a-friend
-    volumes:
-      - mysqldb:/var/lib/mysql
-    ports:
-      - '3306:3306'
-volumes: # add persistent data even if container is removed.
-  mysqldb:
+# services:
+#   mysql:
+#     image: mysql:latest
+#     container_name: find-a-friend
+#     command: --default-authentication-plugin=caching_sha2_password
+#     restart: unless-stopped
+#     environment:
+#         MYSQL_ROOT_PASSWORD: root
+#         MYSQL_PASSWORD: root
+#         MYSQL_DATABASE: find-a-friend
+#     volumes:
+#       - mysqldb:/var/lib/mysql
+#     ports:
+#       - '3306:3306'
+# volumes: # add persistent data even if container is removed.
+#   mysqldb:
+version: '3' #versão da sintaxe do docker-compose
+
+services:                                   #serviços que vamos usar
+    find-a-friend-pg:                           #nome do serviço
+        image: bitnami/postgresql:latest    #imagem que vamos usar
+        ports:                              #portas que vamos usar
+            - 5432:5432
+        environment:                        #variáveis de ambiente
+            - POSTGRES_USERNAME=docker
+            - POSTGRES_PASSWORD=docker
+            - POSTGRES_DATABASE=find-a-friend

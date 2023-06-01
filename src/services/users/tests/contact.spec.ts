@@ -36,7 +36,7 @@ describe("Contact to adoption", ()=>{
         })
 
         const { whatsapp } = await sut.execute({id_pet: pet.id_pet})
-        console.log(whatsapp)
+        //console.log(whatsapp)
         expect(whatsapp).toBe(org.phone)
     })
 })

@@ -6,6 +6,7 @@ import { ValidateCep } from "@/utils/validate-cep";
 import { InvalidCEPError } from "./errors/invalid-cep-error";
 import { validateCnpj } from "@/utils/validate-cnpj";
 import { InvalidCnpjError } from "./errors/invalid-cnpj-error";
+import { UserRepository } from "@/repositorys/users-repository";
 
 interface OrgRegisterRequest{
     name: string
@@ -23,7 +24,7 @@ interface OrgRegisterResponse{
 }
 
 export class OrgRegisterService{
-    constructor(private orgRepository: OrgRepository){}
+    constructor(private orgRepository: OrgRepository, private userRepository: UserRepository){}
     async execute({name, email, password, address, cnpj, cep, city, phone}: OrgRegisterRequest): Promise<OrgRegisterResponse>{
         //validate
         let orgAlreadyExists = await this.orgRepository.findByCNPJ(cnpj)
@@ -32,6 +33,11 @@ export class OrgRegisterService{
             throw new OrgAlreadyExistsError
         }
         orgAlreadyExists = await this.orgRepository.findByEmail(email)
+
+        let userAlreadyExists = await this.userRepository.findByEmail(email)
+        if(userAlreadyExists){
+            throw new OrgAlreadyExistsError
+        }
 
         if(orgAlreadyExists){
             throw new OrgAlreadyExistsError
