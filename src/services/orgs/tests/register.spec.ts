@@ -8,7 +8,7 @@ let inMemoryUserRepository: InMemoryUserRepository
 let sut: OrgRegisterService
 
 
-describe.skip("Org Register", ()=>{
+describe("Org Register", ()=>{
     beforeEach(()=>{
         inMemoryOrgRepository = new InMemoryOrgRepository()
         inMemoryUserRepository = new InMemoryUserRepository()

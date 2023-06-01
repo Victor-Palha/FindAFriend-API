@@ -33,6 +33,8 @@ export class PrismaOrgRepository implements OrgRepository{
         const org = await prisma.org.findUnique({
             where:{
                 id_org: id
+            },include:{
+                pet:true
             }
         })
 

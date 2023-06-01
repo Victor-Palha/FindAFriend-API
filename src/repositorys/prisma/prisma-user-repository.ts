@@ -23,6 +23,8 @@ export class PrismaUserRepository implements UserRepository{
         const user = await prisma.user.findUnique({
             where:{
                 id_user: id
+            },include:{
+                pets:true
             }
         })
 

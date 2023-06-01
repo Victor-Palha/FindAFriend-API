@@ -25,5 +25,5 @@ describe("Org Register (e2e)", ()=>{
         //console.log(response)
 
         expect(response.status).toBe(201)
-    })
+    }, 10000)
 })

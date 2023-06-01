@@ -5,7 +5,7 @@ import { afterAll, beforeAll, describe, expect, it } from "vitest";
 import { prisma } from "@/lib/prisma";
 import { hash } from "bcryptjs";
 
-describe.skip("Details Pet (e2e)", ()=>{
+describe("Details Pet (e2e)", ()=>{
     beforeAll(async ()=>{
         await app.ready()
     })
@@ -37,7 +37,7 @@ describe.skip("Details Pet (e2e)", ()=>{
             }
         })
 
-        const response = await request(app.server).post(`/pet/${pet.id_pet}`)
+        const response = await request(app.server).get(`/pet/${pet.id_pet}`)
     
         expect(response.status).toBe(200)
         expect(response.body.pet.species).toBe("dog")

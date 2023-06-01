@@ -19,7 +19,7 @@ export async function registerOrg(req:FastifyRequest, res:FastifyReply){
     const registerOrgService = makeRegisterOrgService()
     const cityNormalized = city.normalize("NFD").replace(/[^a-zA-Z\s]/g, "").toUpperCase()
 
-    const org = await registerOrgService.execute({
+    await registerOrgService.execute({
         name,
         email,
         password,

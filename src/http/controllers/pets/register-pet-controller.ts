@@ -9,10 +9,11 @@ export async function registerPet(req:FastifyRequest, res:FastifyReply){
         race: z.string(),
         castrated: z.boolean(),
         vaccine_record: z.boolean(),
-        org_id: z.string().uuid()
     })
+
+    const org_id = req.user.sub
     
-    const {castrated, org_id, race, species, vaccine_record} = registerPetSchemaBody.parse(req.body)
+    const {castrated, race, species, vaccine_record} = registerPetSchemaBody.parse(req.body)
     const registerPetService = makeRegisterPetService()
 
     const { pet } = await registerPetService.execute({castrated, org_id, race, species, vaccine_record})

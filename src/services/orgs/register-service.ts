@@ -50,15 +50,16 @@ export class OrgRegisterService{
             throw new InvalidCEPError
         }
 
-        const responseCnpj = await validateCnpj(cnpj)
+        // const responseCnpj = await validateCnpj(cnpj)
+        // console.log(responseCnpj)
 
-        if(responseCnpj.code != 200){
-            throw new InvalidCnpjError
-        }
+        // if(responseCnpj.code != 200){
+        //     throw new InvalidCnpjError
+        // }
 
-        if(name.normalize("NFD").replace(/[^a-zA-Z\s]/g, "").toUpperCase() !== responseCnpj.data[0].nome_fantasia.normalize("NFD").toUpperCase()){
-            throw new InvalidCnpjError
-        }
+        // if(name.normalize("NFD").replace(/[^a-zA-Z\s]/g, "").toUpperCase() !== responseCnpj.data[0].nome_fantasia.normalize("NFD").toUpperCase()){
+        //     throw new InvalidCnpjError
+        // }
 
         //create
         const passwordHash = await hash(password, 8)

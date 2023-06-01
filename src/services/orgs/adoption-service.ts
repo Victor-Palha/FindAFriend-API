@@ -15,6 +15,7 @@ export class AdoptionService{
     constructor(private petRepository: PetRepository, private userRepository: UserRepository){}
     async execute({pet_id, cpf}: AdoptionRequest): Promise<AdoptionResponse>{
         const user = await this.userRepository.findByCpf(cpf)
+        //console.log(user)
         if(!user){
             throw new Error('User not found')
         }
@@ -28,6 +29,8 @@ export class AdoptionService{
         }
 
         const pet = await this.petRepository.updatePet(pet_id, {user_id: user.id_user, situation: 'ADOPTED'})
+
+        //console.log(pet)
 
         return { pet }
     }

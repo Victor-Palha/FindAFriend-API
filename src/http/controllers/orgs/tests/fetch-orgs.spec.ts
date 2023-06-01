@@ -44,7 +44,7 @@ describe("Org fetch (e2e)", ()=>{
         }]
     })
 
-    const response = await request(app.server).get("/orgs/city").query({
+    const response = await request(app.server).get("/orgs/fetch").query({
         city: "Belém"
     })
     //console.log(response.body.org)

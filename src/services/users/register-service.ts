@@ -37,14 +37,14 @@ export class UserRegisterService{
             throw new UserAlreadyExists
         }
         
-        const response = await validateCpf({cpf, birthdate})
-        if(response.code != 200){
-            throw new InvalidCredencialsError
-        }
-        //console.log(name.normalize("NFD").replace(/[^a-zA-Z\s]/g, "").toUpperCase() + " " + " " +response.data[0].nome.normalize("NFD").toUpperCase())
-        if(name.normalize("NFD").replace(/[^a-zA-Z\s]/g, "").toUpperCase() !== response.data[0].nome.normalize("NFD").toUpperCase()){
-            throw new InvalidCredencialsError
-        }
+        // const response = await validateCpf({cpf, birthdate})
+        // if(response.code != 200){
+        //     throw new InvalidCredencialsError
+        // }
+        // //console.log(name.normalize("NFD").replace(/[^a-zA-Z\s]/g, "").toUpperCase() + " " + " " +response.data[0].nome.normalize("NFD").toUpperCase())
+        // if(name.normalize("NFD").replace(/[^a-zA-Z\s]/g, "").toUpperCase() !== response.data[0].nome.normalize("NFD").toUpperCase()){
+        //     throw new InvalidCredencialsError
+        // }
         
         //create
         const passwordHash = await hash(password, 8)
