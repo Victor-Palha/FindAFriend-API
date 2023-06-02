@@ -1,6 +1,6 @@
 name: Run Unit Tests
 
-on: ["push"]
+on: [push]
 
 jobs:
   run-unit-tests:
@@ -13,6 +13,5 @@ jobs:
         node-version: 18
         cache: 'npm'
 
-      - run: npm ci
-
-      - run: npm run test:unit
+    - run: npm ci
+    - run: npm run test:unit
