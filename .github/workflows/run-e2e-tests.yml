@@ -30,3 +30,4 @@ jobs:
       env:
         JWT_TOKEN: test
         DATABASE_URL: "postgresql://docker:docker@localhost:5432/find-a-friend?schema=public"
+        CPF_TEST: "56845241186"
