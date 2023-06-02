@@ -1,7 +1,7 @@
 import { OrgRepository } from "@/repositorys/org-repository";
 import { PetRepository } from "@/repositorys/pet-repository";
 import { Pet, Situation } from "@prisma/client";
-import { InvalidOrgError } from "./errors/invalid-org-error";
+import { InvalidOrgError } from "../errors/invalid-org-error";
 
 interface PetRegisterRequest{
     species: string

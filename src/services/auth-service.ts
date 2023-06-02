@@ -1,7 +1,7 @@
 import { OrgRepository } from "@/repositorys/org-repository";
 import { UserRepository } from "@/repositorys/users-repository";
 import { Org, User } from "@prisma/client";
-import { InvalidCredencialsError } from "./users/errors/invalid-credencials-error";
+import { InvalidCredencialsError } from "./errors/invalid-credencials-error";
 import { compare } from "bcryptjs";
 
 interface AuthRequest{
@@ -45,7 +45,7 @@ export class AuthService{
             auth = {
                 id: user.id_user,
                 name: user.name,
-                type: "USER",
+                type: "MEMBER",
             }
 
         } else if(org){

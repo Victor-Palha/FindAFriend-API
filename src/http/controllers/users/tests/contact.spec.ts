@@ -13,7 +13,7 @@ describe("Contact to adoption (e2e)", ()=>{
         await app.close()
     })
 
-    it("should be able to get a user profile", async ()=>{
+    it("should be able to contact a org to adopt a pet", async ()=>{
         const org = await prisma.org.create({
             data:{
                 name: "MPF GABINETE DO MINISTRO",

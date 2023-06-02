@@ -1,11 +1,11 @@
 import { OrgRepository } from "@/repositorys/org-repository";
 import { Org } from "@prisma/client";
-import { OrgAlreadyExistsError } from "./errors/org-already-exists-error";
+import { OrgAlreadyExistsError } from "../errors/org-already-exists-error";
 import { hash } from "bcryptjs";
 import { ValidateCep } from "@/utils/validate-cep";
-import { InvalidCEPError } from "./errors/invalid-cep-error";
-import { validateCnpj } from "@/utils/validate-cnpj";
-import { InvalidCnpjError } from "./errors/invalid-cnpj-error";
+import { InvalidCEPError } from "../errors/invalid-cep-error";
+//import { validateCnpj } from "@/utils/validate-cnpj";
+import { InvalidCnpjError } from "../errors/invalid-cnpj-error";
 import { UserRepository } from "@/repositorys/users-repository";
 
 interface OrgRegisterRequest{

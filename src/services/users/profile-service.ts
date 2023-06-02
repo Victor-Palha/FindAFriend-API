@@ -1,6 +1,6 @@
 import { UserRepository } from "@/repositorys/users-repository";
 import { User } from "@prisma/client";
-import { InvalidCredencialsError } from "./errors/invalid-credencials-error";
+import { InvalidCredencialsError } from "../errors/invalid-credencials-error";
 
 interface UserProfileRequest{
     user_id: string;

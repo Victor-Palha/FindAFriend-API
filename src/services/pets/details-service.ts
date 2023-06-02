@@ -1,5 +1,6 @@
 import { PetRepository } from "@/repositorys/pet-repository";
 import { Pet } from "@prisma/client";
+import { PetNotFoundError } from "../errors/pet-not-found-error";
 
 interface PetDetailsRequest{
     id_pet: string
@@ -12,7 +13,7 @@ export class DetailsPetService {
     async execute({id_pet}: PetDetailsRequest): Promise<PetDetailsResponse>{
         let pet = await this.petRepository.findById(id_pet)
         if(!pet){
-            throw new Error('Pet not found')
+            throw new PetNotFoundError()
         }
         //console.log(pet)
         return {pet}

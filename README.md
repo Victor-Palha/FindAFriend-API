@@ -44,8 +44,7 @@ Retorna **status code** 201.
     "name": "Nome do usuário",
     "email": "email@user.com",
     "password": "senha123",
-    "cpf": "12345678901",
-    "birthdate": "1990-01-01"
+    "cpf": "12345678901"
 }
 ```
 Retorna **status code** 201.

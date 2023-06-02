@@ -45,7 +45,7 @@ describe("Adoption pet", ()=>{
             vaccine_record: false
         })
 
-        const {pet} = await sut.execute({pet_id: petCreated.id_pet, cpf: user.cpf})
+        const {pet} = await sut.execute({pet_id: petCreated.id_pet, cpf: user.cpf, org_id: org.id_org})
 
         expect(pet.situation).toBe("ADOPTED")
         expect(pet.user_id).toBe(user.id_user)

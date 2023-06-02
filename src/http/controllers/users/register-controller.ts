@@ -8,16 +8,15 @@ export async function userRegister(req:FastifyRequest, res: FastifyReply){
         name: z.string(),
         email: z.string().email(),
         password: z.string().min(6),
-        cpf: z.string().length(11),
-        birthdate: z.string().length(10)
+        cpf: z.string().length(11)
     })
 
-    const {name, email, password, cpf, birthdate} = registerUserSchemaBody.parse(req.body)
+    const {name, email, password, cpf} = registerUserSchemaBody.parse(req.body)
 
 
     try {
         const userRegisterService = makeRegisterUserService()
-        await userRegisterService.execute({name, email, password, cpf, birthdate})
+        await userRegisterService.execute({name, email, password, cpf})
 
     } catch (error) {
         if(error instanceof Error){

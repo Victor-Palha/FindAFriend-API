@@ -1,9 +1,9 @@
 import { UserRepository } from '@/repositorys/users-repository';
 import {hash} from 'bcryptjs';
-import { UserAlreadyExists } from './errors/user-already-exists-error';
+import { UserAlreadyExists } from '../errors/user-already-exists-error';
 import { User } from '@prisma/client';
-import { validateCpf } from '@/utils/validate-cpf';
-import { InvalidCredencialsError } from './errors/invalid-credencials-error';
+//import { validateCpf } from '@/utils/validate-cpf';
+import { InvalidCredencialsError } from '../errors/invalid-credencials-error';
 import { OrgRepository } from '@/repositorys/org-repository';
 
 type RegisterRequest = {
@@ -11,7 +11,6 @@ type RegisterRequest = {
     email: string;
     password: string;
     cpf: string;
-    birthdate: string;
 }
 type RegisterResponse ={
     user:User
@@ -19,7 +18,7 @@ type RegisterResponse ={
 
 export class UserRegisterService{
     constructor(private userRepository: UserRepository, private orgRepository: OrgRepository){}
-    async execute({name, email, password, cpf, birthdate}: RegisterRequest): Promise<RegisterResponse>{
+    async execute({name, email, password, cpf}: RegisterRequest): Promise<RegisterResponse>{
         
         //validate user
         
