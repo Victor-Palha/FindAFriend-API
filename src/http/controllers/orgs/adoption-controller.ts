@@ -13,7 +13,7 @@ export async function adoptionPet(req:FastifyRequest, res:FastifyReply){
     const adoptionPetService = makeAdoptionPetService()
 
     const {pet} = await adoptionPetService.execute({pet_id, cpf})
-    console.log(pet)
+    //console.log(pet)
 
     return res.status(200).send({pet})
 }

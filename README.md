@@ -151,13 +151,14 @@ Para rodar o projeto, é necessário ter o **Docker** e o **Docker Compose** ins
 *   `npm run build` //Compilar o projeto
 *   `npm run start` //Rodar o projeto compilado
 # váriaveis de ambiente
+Crie um arquivo `.env` na raiz do projeto e preencha com as seguintes váriaveis:
 *   DATABASE_URL="postgresql://docker:docker@localhost:5432/find-a-friend?schema=public" <-URL de conexão com o banco de dados no docker
 
 *   PORT=   <- Porta em que o servidor irá rodar
 
 *   CPF_TEST= <- CPF para testes de criação de usuário
 
-*   JWT_SECRET= <- Chave secreta para geração de token JWT
+*   JWT_TOKEN= <- Chave secreta para geração de token JWT
 
 # Estrutura do banco de dados
 ![Diagrama do banco de dados](./faf.png)
